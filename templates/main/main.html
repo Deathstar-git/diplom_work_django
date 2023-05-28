@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load chunk_list %}
+{% block content %}
+    <div class="main-1920">
+
+        <div class="filter">
+            <div class="frame-8">
+                <div>
+                    <div class="chips-active"><a href="{% url 'main' %}"><p class="vse">Холодильники</p></a></div>
+                </div>
+                <div>
+                    <div class="chips"><a href="{% url 'mobile_phones' %}"><p class="dlja-doma">Мобильные телефоны</p></a></div>
+                </div>
+                <div>
+                    <div class="chips"><a href="{% url 'multicookers' %}"><p class="dlja-doma">Мультиварки</p></a></div>
+                </div>
+                <div>
+                    <div class="chips"><p class="dlja-doma">Компьютеры</p></div>
+                </div>
+                <div>
+                    <div class="chips"><p class="dlja-doma">Для красоты и здоровья</p></div>
+                </div>
+                <div>
+                    <div class="chips"><p class="dlja-doma">Связь</p></div>
+                </div>
+                <div>
+                    <div class="chips"><p class="dlja-doma">Автотехника</p></div>
+                </div>
+                <div>
+                    <div class="chips"><p class="dlja-doma">Для ремонта</p></div>
+                </div>
+                <div>
+                    <div class="chips"><p class="dlja-doma">Разное</p></div>
+                </div>
+                <div>
+                    <div class="chips"><p class="dlja-doma">Фото и видео</p></div>
+                </div>
+                <div>
+                    <div class="chips"><p class="dlja-doma">Для сада</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="frame-9">
+            {% with fridges|chunk_list:6 as cols %}
+                {% for col in cols %}
+                    <div class="frame-5">
+                        {% for fridge in col %}
+                            <div class="card">
+                                <div class="frame-4">
+                                    <div class="frame-2">
+                                        <div class="frame-1">
+                                            <img
+                                                    alt=""
+                                                    class="product-image"
+                                                    src={{ fridge.img_url }}
+                                            />
+                                            <p class="holodil-nik-indesit-its-4180-w">
+                                                {{ fridge.title }}
+                                            </p>
+                                        </div>
+                                        <div class="frame-3">
+                                            <div class="metadata">
+                                                {% if fridge.fridgegrade.total_grade == 0 %}
+                                                    <div class="star tooltip">
+                                                        <img alt="" class="vector" src="/media/png/rejected.png"/>
+                                                        <p class="tooltiptext">Медаль без оценки: товар, не имеющий
+                                                            отзывов</p>
+                                                    </div>
+                                                {% endif %}
+                                                {% if fridge.fridgegrade.total_grade <= 50 and fridge.fridgegrade.total_grade > 0 %}
+                                                    <div class="star tooltip">
+                                                        <img alt="" class="vector" src="/media/png/bronze-medal.png"/>
+                                                        <p class="tooltiptext">Бронзовая медаль: товар имеет приемлемое
+                                                            кол-во очков рейтинга, которых считается на основе
+                                                            количества позитивных, негативных и нейтральных отзывов</p>
+                                                    </div>
+                                                {% endif %}
+                                                {% if fridge.fridgegrade.total_grade <= 90 and fridge.fridgegrade.total_grade > 50 %}
+                                                    <div class="star tooltip">
+                                                        <img alt="" class="vector" src="/media/png/silver-medal.png"/>
+                                                        <p class="tooltiptext">Серебрянная медаль: товар имеет достойное
+                                                            кол-во очков рейтинга, которых считается на основе
+                                                            количества позитивных, негативных и нейтральных отзывов</p>
+                                                    </div>
+                                                {% endif %}
+                                                {% if fridge.fridgegrade.total_grade > 90 %}
+                                                    <div class="star tooltip">
+                                                        <img alt="" class="vector tooltiptext"
+                                                             src="/media/png/gold-medal.png"/>
+                                                        <p class="tooltiptext">Золотая медаль: товар имеет очень большое
+                                                            кол-во очков рейтинга, которых считается на основе
+                                                            количества позитивных, негативных и нейтральных отзывов</p>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <p class="num-21-otzyv">{{ fridge.fridgecomment_set.count }} отзыв</p>
+                                        </div>
+                                    </div>
+                                    <div class="search-button">
+                                        <a href="{% url 'fridge' fridge.id %} ">
+                                            <p class="posmotret-otzyv">Посмотреть оценку</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock %}

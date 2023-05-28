@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load calc_percents %}
+{% load get_verbose_name %}
+{% block content %}
+    <div class="bg">
+
+        <div class="card-main">
+            <div class="header-card">
+                <div class="rewiew-div">
+                    <img
+                            alt=""
+                            class="prod-image"
+                            src={{ fridge.img_url }}
+                    />
+                </div>
+                <div class="grade-div">
+                    <div class="title-card">
+                    <span class="tooltip-icon">?</span>
+                            <div class="tooltip-icon-text">Наведите на медаль для отображения доп.информации</div>
+                        <p class="prod-title">{{ fridge.title }}</p>
+                        <div class="comment-count">
+                            {% if fridge.fridgegrade.total_grade == 0 %}
+                                <div class="star tooltip">
+                                    <img alt="" class="vector" src="/media/png/rejected.png"/>
+                                    <p class="tooltiptext">Медаль без оценки: товар, не имеющий отзывов</p>
+                                </div>
+                            {% endif %}
+                            {% if fridge.fridgegrade.total_grade <= 50 and fridge.fridgegrade.total_grade > 0 %}
+                                <div class="star tooltip">
+                                    <img alt="" class="vector" src="/media/png/bronze-medal.png"/>
+                                    <p class="tooltiptext">Бронзовая медаль: товар имеет приемлемое кол-во очков рейтинга, которых считается на основе количества позитивных, негативных и нейтральных отзывов</p>
+                                </div>
+                            {% endif %}
+                            {% if fridge.fridgegrade.total_grade <= 90 and fridge.fridgegrade.total_grade > 50 %}
+                                <div class="star tooltip">
+                                    <img alt="" class="vector" src="/media/png/silver-medal.png"/>
+                                    <p class="tooltiptext">Серебрянная медаль: товар имеет достойное кол-во очков рейтинга, которых считается на основе количества позитивных, негативных и нейтральных отзывов</p>
+                                </div>
+                            {% endif %}
+                            {% if fridge.fridgegrade.total_grade > 90 %}
+                                <div class="star tooltip">
+                                    <img alt="" class="vector tooltiptext" src="/media/png/gold-medal.png"/>
+                                    <p class="tooltiptext">Золотая медаль: товар имеет очень большое кол-во очков рейтинга, которых считается на основе количества позитивных, негативных и нейтральных отзывов</p>
+                                </div>
+                            {% endif %}
+                            <p class="num-21-otzyv">{{ fridge.fridgecomment_set.count }} отзыв</p>
+                        </div>
+                    </div>
+                    <div class="bar-title">Статистика отзывов</div>
+                    <div class="bar-chart">
+                            <span class="tooltip-icon">?</span>
+                            <div class="tooltip-icon-text">Наведите на столбцы графика для отображения доп. информации</div>
+                            <div>
+                            <div class="bar tooltip" style="background-color: green;  height: calc({{ fridge.fridgegrade.positive_count }} * 10px);">
+                                <p class="tooltiptext">Положительные отзывы:{% calc_percents fridge.fridgecomment_set.count  fridge.fridgegrade.positive_count %}%</p>
+                            </div>
+                                <span class="bar-span">{{ fridge.fridgegrade.positive_count }}</span>
+                                </div>
+                            <div>
+                            <div class="bar tooltip" style="background-color: grey;  height: calc({{ fridge.fridgegrade.neutral_count }} * 10px);">
+                                <p class="tooltiptext">Нейтральные отзывы:{% calc_percents fridge.fridgecomment_set.count  fridge.fridgegrade.neutral_count %}%</p>
+                            </div>
+                                <span class="bar-span">{{ fridge.fridgegrade.neutral_count }}</span>
+                                </div>
+                            <div>
+                            <div class="bar tooltip" style="background-color: red;  height: calc({{ fridge.fridgegrade.negative_count }} * 10px);">
+                                <p class="tooltiptext">Негативные отзывы:{% calc_percents fridge.fridgecomment_set.count  fridge.fridgegrade.negative_count %}%</p>
+                            </div>
+                                <span class="bar-span">{{ fridge.fridgegrade.negative_count }}</span>
+                                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-card">
+                <div style="margin-left: 20px;min-width: 500px; border-right: 1px solid lightgrey;padding-right: 20px;">
+                    <div class="comment-header">
+                        <span class="comment-title-span">Отзывы</span>
+                        <span class="comment-count-span">{{ fridge.fridgecomment_set.count }} </span>
+                    </div>
+                    {% for c in fridge.fridgecomment_set.all %}
+                        <div class="comment-div">
+                            <div class="comment-title">Автор</div>
+                            <div class="comment-text">Отзыв</div>
+                            <span>{{ c.text }}</span>
+                            <div class="comment-title">Оценка</div>
+                            {% if c.grade == 0 %}
+                                <span style="color:grey">Нейтральная</span>
+                            {% elif c.grade == 1 %}
+                                <span style="color:green">Положительная</span>
+                            {% elif c.grade == 2 %}
+                                <span style="color:red">Отрицательная</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="characteristics-div">
+                    <div class="comment-header">
+                        <span class="comment-title-span">Характеристики</span>
+                    </div>
+                    {% if fridge.total_volume %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name fridge "total_volume" %}</span>
+                            <span class="characteristics-span">{{ fridge.total_volume }}</span>
+                        </div>
+                    {% endif %}
+                    {% if fridge.total_useful_volume %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name fridge "total_useful_volume" %}</span>
+                            <span class="characteristics-span">{{ fridge.total_useful_volume }}</span>
+                        </div>
+                    {% endif %}
+                    {% if fridge.useful_volume_refrigerator %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name fridge "useful_volume_refrigerator" %}</span>
+                            <span class="characteristics-span">{{ fridge.useful_volume_refrigerator }}</span>
+                        </div>
+                    {% endif %}
+                    {% if fridge.total_useful_volume %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name fridge "volume_refrigerator" %}</span>
+                            <span class="characteristics-span">{{ fridge.volume_refrigerator }}</span>
+                        </div>
+                    {% endif %}
+                    {% if fridge.weight %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name fridge "weight" %}</span>
+                            <span class="characteristics-span">{{ fridge.weight }}</span>
+                        </div>
+                    {% endif %}
+                    {% if fridge.width %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name fridge "width" %}</span>
+                            <span class="characteristics-span">{{ fridge.width }}</span>
+                        </div>
+                    {% endif %}
+                    {% if fridge.depth %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name fridge "depth" %}</span>
+                            <span class="characteristics-span">{{ fridge.depth }}</span>
+                        </div>
+                    {% endif %}
+                    {% if fridge.dimensions %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name fridge "dimensions" %}</span>
+                            <span class="characteristics-span">{{ fridge.dimensions }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

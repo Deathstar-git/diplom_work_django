@@ -1,0 +1,8 @@
+<div class="search-answer">
+{% for result in results %}
+    <!-- Выводите информацию о каждом результате поиска -->
+    <p>{{ result.name }}</p>
+{% empty %}
+    <p>Нет результатов поиска</p>
+{% endfor %}
+</div>

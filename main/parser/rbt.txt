@@ -1,0 +1,29 @@
+    'Мультиварка-скороварка LERAN MCR 5064 PR': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/leran_mcr_5064_pr/
+    'Мультиварка KITFORT КТ-205': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/kitfort_kt_205/
+    'Мультиварка GARLYN MR-Duo 10': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/garlyn_mr_duo_10/
+    'Мультиварка-скороварка GFGril GFM-500': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/gfgril_gfm_500/
+    'Мультиварка-скороварка Galaxy GL-2650': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/galaxy_gl-2650_i673514/
+    'Мультиварка VITEK VT-4281': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/vitek_vt_4281/
+    'Мультиварка GARLYN MR-Max 5': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/garlyn_mr_max_5/
+    'Мультиварка GOODHELPER MC-5100': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/goodhelper_mc-5100/
+    'Мультиварка HYUNDAI HYMC-1617 серебристый/черный': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/hyundai_hymc_1617_serebristyy_chernyy/
+    'Мультиварка-скороварка BRAYER BR 2401': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/brayer_br_2401/
+    'Мультиварка KITFORT КТ-207 медленноварка': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/kitfort_kt_207_medlennovarka/
+    'Мультиварка Scarlett SC-MC410S26': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/scarlett_sc_mc410s26/
+    'Мультиварка BINATONE MCR 5030': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/binatone_mcr_5030/
+    'Мультиварка Galaxy GL-2651': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/galaxy_gl-2651/
+    'Мультиварка-скороварка MIDEA MPC-6037': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/midea_mpc_6037/
+    'Мультиварка MIDEA MPC-6032': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/midea_mpc_6032/
+    'Мультиварка-скороварка HYUNDAI HYMC-2407': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/hyundai_hymc_2407/
+    'Мультиварка GFGril GFM-105': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/gfgril_gfm_105/
+    'Мультиварка ECON ECO-50MC': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/econ_eco_50mc/
+    'Мультиварка MIDEA MPC-6020': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/midea_mpc_6020/
+    'Мультиварка StarWind SMC4201 серебристый/черный': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/starwind_smc4201_serebristyy_chernyy_i743679/
+    'Мультиварка GOODHELPER MC-5111': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/goodhelper_mc_5111/
+    'Мультиварка SUPRA MCS-4115': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/supra_mcs_4115/
+    'Мультиварка VITEK VT-4284': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/vitek_vt_4284/
+    'Мультиварка GARLYN MR-Duo 5': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/garlyn_mr_duo_5/
+    'Мультиварка HYUNDAI HYMC-2400': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/hyundai_hymc_2400/
+    'Мультиварка HYUNDAI HYMC-1610': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/hyundai_hymc_1610/
+    'Мультиварка GARLYN MR-Solo 11': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/garlyn_mr_solo_11/
+    'Мультиварка MIDEA MPC-6033': https://www.rbt.ru/cat/kuhonnaya_tehnika/multivarki/midea_mpc_6033/

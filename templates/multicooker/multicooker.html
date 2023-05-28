@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load calc_percents %}
+{% load get_verbose_name %}
+{% block content %}
+    <div class="bg">
+
+        <div class="card-main">
+            <div class="header-card">
+                <div class="rewiew-div">
+                    <img
+                            alt=""
+                            class="prod-image"
+                            src={{ multicooker.img_url }}
+                    />
+                </div>
+                <div class="grade-div">
+                    <div class="title-card">
+                    <span class="tooltip-icon">?</span>
+                            <div class="tooltip-icon-text">Наведите на медаль для отображения доп.информации</div>
+                        <p class="prod-title">{{ multicooker.title }}</p>
+                        <div class="comment-count">
+                            {% if multicooker.multicookergrade.total_grade == 0 %}
+                                <div class="star tooltip">
+                                    <img alt="" class="vector" src="/media/png/rejected.png"/>
+                                    <p class="tooltiptext">Медаль без оценки: товар, не имеющий отзывов</p>
+                                </div>
+                            {% endif %}
+                            {% if multicooker.multicookergrade.total_grade <= 50 and multicooker.multicookergrade.total_grade > 0 %}
+                                <div class="star tooltip">
+                                    <img alt="" class="vector" src="/media/png/bronze-medal.png"/>
+                                    <p class="tooltiptext">Бронзовая медаль: товар имеет приемлемое кол-во очков рейтинга, которых считается на основе количества позитивных, негативных и нейтральных отзывов</p>
+                                </div>
+                            {% endif %}
+                            {% if multicooker.multicookergrade.total_grade <= 90 and multicooker.multicookergrade.total_grade > 50 %}
+                                <div class="star tooltip">
+                                    <img alt="" class="vector" src="/media/png/silver-medal.png"/>
+                                    <p class="tooltiptext">Серебрянная медаль: товар имеет достойное кол-во очков рейтинга, которых считается на основе количества позитивных, негативных и нейтральных отзывов</p>
+                                </div>
+                            {% endif %}
+                            {% if multicooker.multicookergrade.total_grade > 90 %}
+                                <div class="star tooltip">
+                                    <img alt="" class="vector tooltiptext" src="/media/png/gold-medal.png"/>
+                                    <p class="tooltiptext">Золотая медаль: товар имеет очень большое кол-во очков рейтинга, которых считается на основе количества позитивных, негативных и нейтральных отзывов</p>
+                                </div>
+                            {% endif %}
+                            <p class="num-21-otzyv">{{ multicooker.multicookercomment_set.count }} отзыв</p>
+                        </div>
+                    </div>
+                    <div class="bar-title">Статистика отзывов</div>
+                    <div class="bar-chart">
+                            <span class="tooltip-icon">?</span>
+                            <div class="tooltip-icon-text">Наведите на столбцы графика для отображения доп. информации</div>
+                            <div>
+                            <div class="bar tooltip" style="background-color: green;  height: calc({{ multicooker.multicookergrade.positive_count }} * 10px);">
+                                <p class="tooltiptext">Положительные отзывы:{% calc_percents  multicooker.multicookercomment_set.count  multicooker.multicookergrade.positive_count %}%</p>
+                            </div>
+                                <span class="bar-span">{{ multicooker.multicookergrade.positive_count }}</span>
+                                </div>
+                            <div>
+                            <div class="bar tooltip" style="background-color: grey;  height: calc({{ multicooker.multicookergrade.neutral_count }} * 10px);">
+                                <p class="tooltiptext">Нейтральные отзывы:{% calc_percents multicooker.multicookercomment_set.count  multicooker.multicookergrade.neutral_count %}%</p>
+                            </div>
+                                <span class="bar-span">{{ multicooker.multicookergrade.neutral_count }}</span>
+                                </div>
+                            <div>
+                            <div class="bar tooltip" style="background-color: red;  height: calc({{ multicooker.multicookergrade.negative_count }} * 10px);">
+                                <p class="tooltiptext">Негативные отзывы:{% calc_percents multicooker.multicookercomment_set.count  multicooker.multicookergrade.negative_count %}%</p>
+                            </div>
+                                <span class="bar-span">{{ multicooker.multicookergrade.negative_count }}</span>
+                                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-card">
+                <div style="margin-left: 20px;min-width: 500px; border-right: 1px solid lightgrey;padding-right: 20px;">
+                    <div class="comment-header">
+                        <span class="comment-title-span">Отзывы</span>
+                        <span class="comment-count-span">{{ multicooker.multicookercomment_set.count }} </span>
+                    </div>
+                    {% for c in multicooker.multicookercomment_set.all %}
+                        <div class="comment-div">
+                            <div class="comment-title">Автор</div>
+                            <div class="comment-text">Отзыв</div>
+                            <span>{{ c.text }}</span>
+                            <div class="comment-title">Оценка</div>
+                            {% if c.grade == 0 %}
+                                <span style="color:grey">Нейтральная</span>
+                            {% elif c.grade == 1 %}
+                                <span style="color:green">Положительная</span>
+                            {% elif c.grade == 2 %}
+                                <span style="color:red">Отрицательная</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="characteristics-div">
+                    <div class="comment-header">
+                        <span class="comment-title-span">Характеристики</span>
+                    </div>
+                    {% if multicooker.type %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "type" %}</span>
+                            <span class="characteristics-span">{{ multicooker.type }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.bowl_volume %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "bowl_volume" %}</span>
+                            <span class="characteristics-span">{{ multicooker.bowl_volume }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.control_type %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "control_type" %}</span>
+                            <span class="characteristics-span">{{ multicooker.control_type }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.three_d_heating %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "three_d_heating" %}</span>
+                            <span class="characteristics-span">{{ multicooker.three_d_heating }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.housing_material %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "housing_material" %}</span>
+                            <span class="characteristics-span">{{ multicooker.housing_material }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.power_consumption %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "power_consumption" %}</span>
+                            <span class="characteristics-span">{{multicooker.power_consumption }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.max_timer_setting_time %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "max_timer_setting_time" %}</span>
+                            <span class="characteristics-span">{{multicooker.max_timer_setting_time }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.delayed_start %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "delayed_start" %}</span>
+                            <span class="characteristics-span">{{ multicooker.delayed_start }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.color %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "color" %}</span>
+                            <span class="characteristics-span">{{ multicooker.color }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.guarantee %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "guarantee" %}</span>
+                            <span class="characteristics-span">{{ multicooker.guarantee }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.count_automatic_program %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "count_automatic_program" %}</span>
+                            <span class="characteristics-span">{{ multicooker.count_automatic_program }}</span>
+                        </div>
+                    {% endif %}
+                    {% if multicooker.viewing_window %}
+                        <div class="characteristics-item">
+                            <span>{% get_verbose_field_name multicooker "viewing_window" %}</span>
+                            <span class="characteristics-span">{{ multicooker.viewing_window }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
